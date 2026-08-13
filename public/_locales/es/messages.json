@@ -5,7 +5,7 @@
   },
   "extensionDescription": {
     "description": "Extension description",
-    "message": "Modifica los encabezados de solicitud del sitio actual, incluidas las peticiones de iframes."
+    "message": "Herramienta open-source para editar encabezados HTTP por sitio, incluidos iframes. Pega desde Chrome DevTools."
   },
   "popupTitle": {
     "description": "Popup title",

@@ -5,7 +5,7 @@
   },
   "extensionDescription": {
     "description": "Extension description",
-    "message": "修改当前网站的请求头，包含 iframe 内的请求。"
+    "message": "开源扩展：按网站修改 HTTP 请求头，支持 iframe；可粘贴 Chrome 开发者工具复制的请求头。"
   },
   "popupTitle": {
     "description": "Popup title",

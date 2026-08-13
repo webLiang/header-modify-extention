@@ -5,7 +5,7 @@
   },
   "extensionDescription": {
     "description": "Extension description",
-    "message": "वर्तमान साइट के अनुरोध हेडर बदलें, जिसमें iframe अनुरोध भी शामिल हैं।"
+    "message": "ओपन-सोर्स टूल: साइट के अनुसार HTTP अनुरोध हेडर बदलें (iframe सहित)। Chrome DevTools से पेस्ट करें।"
   },
   "popupTitle": {
     "description": "Popup title",

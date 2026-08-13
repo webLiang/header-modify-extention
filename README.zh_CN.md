@@ -11,6 +11,28 @@
 
 ---
 
+## Chrome 网上应用店
+
+发布指南、可粘贴的五语商店文案、隐私政策、审核说明与宣传图：
+
+- [STORE.zh-CN.md](STORE.zh-CN.md) · [STORE.md](STORE.md)
+- [docs/chrome-web-store/](docs/chrome-web-store/) — 文案、图片、提交清单
+- [PRIVACY.zh-CN.md](PRIVACY.zh-CN.md) · [PRIVACY.md](PRIVACY.md)
+
+```bash
+pnpm build
+pnpm zip   # → releases/header-modify-extention_v{version}.zip
+```
+
+重新生成图标 / 商店图：
+
+```bash
+pnpm assets:store
+pnpm build
+```
+
+---
+
 ## 功能
 
 - **按网站启用**（按 origin 记忆）。
@@ -97,6 +119,11 @@ Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like 
 | `pnpm test` | Vitest（watch） |
 | `pnpm test:run` | Vitest 单次 |
 | `pnpm lint` | ESLint |
+| `pnpm zip` | 打包 `dist/` → `releases/header-modify-extention_v*.zip` |
+| `pnpm build:zip` | 生产构建 + zip |
+| `pnpm release:github:dry` | 构建 zip 并预览 GitHub Release 说明（不打 tag / 不推送） |
+| `pnpm release:github:full` | 构建、提交、打 tag、`gh release create`、推送 |
+| `pnpm assets:store` | 重新生成图标与商店宣传图/截图 |
 
 ---
 

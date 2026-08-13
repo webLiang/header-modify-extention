@@ -11,6 +11,28 @@ Chrome extension that **rewrites request headers** for the current site. When en
 
 ---
 
+## Chrome Web Store
+
+Publishing guide and paste-ready listing copy (5 languages), privacy policy, review justification, and promo images:
+
+- [STORE.md](STORE.md) · [STORE.zh-CN.md](STORE.zh_CN.md)
+- [docs/chrome-web-store/](docs/chrome-web-store/) — listings, images, checklist
+- [PRIVACY.md](PRIVACY.md) · [PRIVACY.zh-CN.md](PRIVACY.zh-CN.md)
+
+```bash
+pnpm build
+pnpm zip   # → releases/header-modify-extention_v{version}.zip
+```
+
+Regenerate icons / store images:
+
+```bash
+pnpm assets:store
+pnpm build
+```
+
+---
+
 ## Features
 
 - Enable rewriting **per site** (remembered by origin).
@@ -97,6 +119,11 @@ Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like 
 | `pnpm test` | Vitest (watch) |
 | `pnpm test:run` | Vitest once |
 | `pnpm lint` | ESLint |
+| `pnpm zip` | Pack `dist/` → `releases/header-modify-extention_v*.zip` |
+| `pnpm build:zip` | Production build + zip |
+| `pnpm release:github:dry` | Build zip + preview GitHub Release notes (no tag/push) |
+| `pnpm release:github:full` | Build, commit, tag, `gh release create`, push |
+| `pnpm assets:store` | Regenerate icons + store promo/screenshots |
 
 ---
 

@@ -164,7 +164,7 @@ const Popup = () => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'header-modify-export.json';
+    a.download = 'header-modify-extention-export.json';
     a.click();
     URL.revokeObjectURL(url);
   };

@@ -1,12 +1,12 @@
 {
-  "name": "header-modify",
+  "name": "header-modify-extention",
   "version": "1.0.0",
   "description": "Chrome extension to modify request headers for the current site (including iframes)",
   "license": "MIT",
   "author": "webLiang",
   "repository": {
     "type": "git",
-    "url": "https://github.com/webLiang/header-modify.git"
+    "url": "https://github.com/webLiang/header-modify-extention.git"
   },
   "scripts": {
     "build": "tsc --noEmit && vite build",
@@ -19,6 +19,12 @@
     "dev:firefox": "pnpm build:hmr && (run-p wss build:firefox:watch)",
     "test": "vitest",
     "test:run": "vitest run",
+    "zip": "node scripts/pack.mjs",
+    "build:zip": "pnpm build && pnpm zip",
+    "release:github:dry": "node scripts/github-release.mjs --dry-run",
+    "release:github": "node scripts/github-release.mjs --publish --commit --push",
+    "release:github:full": "node scripts/github-release.mjs --full",
+    "assets:store": "python3 scripts/generate-store-assets.py",
     "commitlint": "commitlint --edit",
     "lint": "eslint src --ext .ts,.js,.tsx,.jsx",
     "lint:fix": "pnpm lint --fix",

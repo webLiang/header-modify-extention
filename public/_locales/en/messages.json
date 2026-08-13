@@ -5,7 +5,7 @@
   },
   "extensionDescription": {
     "description": "Extension description",
-    "message": "Modify request headers for the current site, including iframe requests."
+    "message": "Open-source tool to edit HTTP request headers per site, including iframe requests. Paste from Chrome DevTools."
   },
   "popupTitle": {
     "description": "Popup title",

@@ -6,6 +6,13 @@
 
 # build
 /dist
+/releases/*.zip
+/releases/*.crx
+
+# .cursor — track commands; ignore local debug logs
+.cursor/*
+!.cursor/commands/
+!.cursor/commands/**
 
 # etc
 .DS_Store

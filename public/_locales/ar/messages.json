@@ -5,7 +5,7 @@
   },
   "extensionDescription": {
     "description": "Extension description",
-    "message": "عدّل ترويسات الطلب للموقع الحالي، بما في ذلك طلبات iframe."
+    "message": "أداة مفتوحة المصدر لتعديل ترويسات طلب HTTP حسب الموقع، بما فيها iframe. الصق من Chrome DevTools."
   },
   "popupTitle": {
     "description": "Popup title",
