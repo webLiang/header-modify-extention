@@ -1,0 +1,126 @@
+{
+  "extensionName": {
+    "description": "Extension name",
+    "message": "تعديل الترويسات"
+  },
+  "extensionDescription": {
+    "description": "Extension description",
+    "message": "عدّل ترويسات الطلب للموقع الحالي، بما في ذلك طلبات iframe."
+  },
+  "popupTitle": {
+    "description": "Popup title",
+    "message": "تعديل الترويسات"
+  },
+  "siteUnsupported": {
+    "description": "Shown when the active tab is not http(s)",
+    "message": "افتح صفحة http(s) لتفعيل تعديل الترويسات."
+  },
+  "enableForSite": {
+    "description": "Main toggle label",
+    "message": "تفعيل لهذا الموقع"
+  },
+  "enabledHint": {
+    "description": "Hint when site is enabled",
+    "message": "كل طلبات هذا التبويب (بما فيها iframe) تستخدم ترويساتك."
+  },
+  "disabledHint": {
+    "description": "Hint when site is disabled",
+    "message": "فعّل لتطبيق الترويسات على تبويب هذا الموقع وiframe."
+  },
+  "pasteSectionTitle": {
+    "description": "Paste section heading",
+    "message": "لصق من أدوات المطوّر"
+  },
+  "pastePlaceholder": {
+    "description": "Paste textarea placeholder",
+    "message": "الصق ترويسات الطلب المنسوخة من Chrome DevTools…"
+  },
+  "parseMerge": {
+    "description": "Parse and merge button",
+    "message": "تحليل ودمج"
+  },
+  "parseEmpty": {
+    "description": "Toast when paste is empty",
+    "message": "الصق بعض الترويسات أولاً."
+  },
+  "parseFailed": {
+    "description": "Toast when parse finds nothing",
+    "message": "تعذّر تحليل أي ترويسة."
+  },
+  "parseSuccess": {
+    "description": "Toast after successful parse",
+    "message": "تم دمج $1 ترويسة."
+  },
+  "headersSectionTitle": {
+    "description": "Headers list heading",
+    "message": "ترويسات الطلب"
+  },
+  "addHeader": {
+    "description": "Add header button",
+    "message": "إضافة"
+  },
+  "headerNamePlaceholder": {
+    "description": "Header name input placeholder",
+    "message": "الاسم"
+  },
+  "headerValuePlaceholder": {
+    "description": "Header value input placeholder",
+    "message": "القيمة"
+  },
+  "emptyHeaders": {
+    "description": "Empty state for header list",
+    "message": "لا توجد ترويسات بعد. الصق من أدوات المطوّر أو أضف يدوياً."
+  },
+  "deleteHeader": {
+    "description": "Delete row aria label",
+    "message": "حذف"
+  },
+  "toggleHeader": {
+    "description": "Enable/disable single header",
+    "message": "تبديل"
+  },
+  "clearAll": {
+    "description": "Clear all headers button",
+    "message": "مسح الكل"
+  },
+  "exportJson": {
+    "description": "Export button",
+    "message": "تصدير"
+  },
+  "importJson": {
+    "description": "Import button",
+    "message": "استيراد"
+  },
+  "saved": {
+    "description": "Saved toast",
+    "message": "تم الحفظ"
+  },
+  "importSuccess": {
+    "description": "Import success toast",
+    "message": "تم استيراد $1 ترويسة."
+  },
+  "importFailed": {
+    "description": "Import failure toast",
+    "message": "فشل الاستيراد. استخدم ملف JSON صالحاً."
+  },
+  "cleared": {
+    "description": "Cleared toast",
+    "message": "تم مسح الترويسات."
+  },
+  "language": {
+    "description": "Language selector label",
+    "message": "اللغة"
+  },
+  "activeCount": {
+    "description": "Count of enabled headers",
+    "message": "$1 نشط"
+  },
+  "loading": {
+    "description": "Loading fallback",
+    "message": "جارٍ التحميل…"
+  },
+  "errorBoundary": {
+    "description": "Error boundary fallback",
+    "message": "حدث خطأ ما."
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "extensionName": {
+    "description": "Extension name",
+    "message": "请求头修改"
+  },
+  "extensionDescription": {
+    "description": "Extension description",
+    "message": "修改当前网站的请求头，包含 iframe 内的请求。"
+  },
+  "popupTitle": {
+    "description": "Popup title",
+    "message": "请求头修改"
+  },
+  "siteUnsupported": {
+    "description": "Shown when the active tab is not http(s)",
+    "message": "请打开 http(s) 页面后再启用请求头改写。"
+  },
+  "enableForSite": {
+    "description": "Main toggle label",
+    "message": "为当前网站启用"
+  },
+  "enabledHint": {
+    "description": "Hint when site is enabled",
+    "message": "此标签页内所有请求（含 iframe）都会使用你配置的请求头。"
+  },
+  "disabledHint": {
+    "description": "Hint when site is disabled",
+    "message": "开启后，将对本站标签页及 iframe 中的请求应用请求头。"
+  },
+  "pasteSectionTitle": {
+    "description": "Paste section heading",
+    "message": "从开发者工具粘贴"
+  },
+  "pastePlaceholder": {
+    "description": "Paste textarea placeholder",
+    "message": "粘贴从 Chrome 开发者工具复制的请求头…"
+  },
+  "parseMerge": {
+    "description": "Parse and merge button",
+    "message": "解析并合并"
+  },
+  "parseEmpty": {
+    "description": "Toast when paste is empty",
+    "message": "请先粘贴请求头内容。"
+  },
+  "parseFailed": {
+    "description": "Toast when parse finds nothing",
+    "message": "未能解析出任何请求头。"
+  },
+  "parseSuccess": {
+    "description": "Toast after successful parse",
+    "message": "已合并 $1 个请求头。"
+  },
+  "headersSectionTitle": {
+    "description": "Headers list heading",
+    "message": "请求头列表"
+  },
+  "addHeader": {
+    "description": "Add header button",
+    "message": "添加"
+  },
+  "headerNamePlaceholder": {
+    "description": "Header name input placeholder",
+    "message": "名称"
+  },
+  "headerValuePlaceholder": {
+    "description": "Header value input placeholder",
+    "message": "值"
+  },
+  "emptyHeaders": {
+    "description": "Empty state for header list",
+    "message": "暂无请求头。可从开发者工具粘贴，或手动添加。"
+  },
+  "deleteHeader": {
+    "description": "Delete row aria label",
+    "message": "删除"
+  },
+  "toggleHeader": {
+    "description": "Enable/disable single header",
+    "message": "开关"
+  },
+  "clearAll": {
+    "description": "Clear all headers button",
+    "message": "清空"
+  },
+  "exportJson": {
+    "description": "Export button",
+    "message": "导出"
+  },
+  "importJson": {
+    "description": "Import button",
+    "message": "导入"
+  },
+  "saved": {
+    "description": "Saved toast",
+    "message": "已保存"
+  },
+  "importSuccess": {
+    "description": "Import success toast",
+    "message": "已导入 $1 个请求头。"
+  },
+  "importFailed": {
+    "description": "Import failure toast",
+    "message": "导入失败，请使用有效的 JSON 导出文件。"
+  },
+  "cleared": {
+    "description": "Cleared toast",
+    "message": "已清空请求头。"
+  },
+  "language": {
+    "description": "Language selector label",
+    "message": "语言"
+  },
+  "activeCount": {
+    "description": "Count of enabled headers",
+    "message": "$1 个启用"
+  },
+  "loading": {
+    "description": "Loading fallback",
+    "message": "加载中…"
+  },
+  "errorBoundary": {
+    "description": "Error boundary fallback",
+    "message": "出现错误。"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "extensionName": {
+    "description": "Extension name",
+    "message": "Header Modify"
+  },
+  "extensionDescription": {
+    "description": "Extension description",
+    "message": "वर्तमान साइट के अनुरोध हेडर बदलें, जिसमें iframe अनुरोध भी शामिल हैं।"
+  },
+  "popupTitle": {
+    "description": "Popup title",
+    "message": "Header Modify"
+  },
+  "siteUnsupported": {
+    "description": "Shown when the active tab is not http(s)",
+    "message": "हेडर बदलने के लिए कोई http(s) पेज खोलें।"
+  },
+  "enableForSite": {
+    "description": "Main toggle label",
+    "message": "इस साइट के लिए सक्षम करें"
+  },
+  "enabledHint": {
+    "description": "Hint when site is enabled",
+    "message": "इस टैब के सभी अनुरोध (iframe सहित) आपके हेडर का उपयोग करते हैं।"
+  },
+  "disabledHint": {
+    "description": "Hint when site is disabled",
+    "message": "इस साइट के टैब और iframe पर हेडर लागू करने के लिए चालू करें।"
+  },
+  "pasteSectionTitle": {
+    "description": "Paste section heading",
+    "message": "DevTools से पेस्ट करें"
+  },
+  "pastePlaceholder": {
+    "description": "Paste textarea placeholder",
+    "message": "Chrome DevTools से कॉपी किए गए अनुरोध हेडर पेस्ट करें…"
+  },
+  "parseMerge": {
+    "description": "Parse and merge button",
+    "message": "पार्स और मर्ज"
+  },
+  "parseEmpty": {
+    "description": "Toast when paste is empty",
+    "message": "पहले कुछ हेडर पेस्ट करें।"
+  },
+  "parseFailed": {
+    "description": "Toast when parse finds nothing",
+    "message": "कोई हेडर पार्स नहीं हो सका।"
+  },
+  "parseSuccess": {
+    "description": "Toast after successful parse",
+    "message": "$1 हेडर मर्ज किए गए।"
+  },
+  "headersSectionTitle": {
+    "description": "Headers list heading",
+    "message": "अनुरोध हेडर"
+  },
+  "addHeader": {
+    "description": "Add header button",
+    "message": "जोड़ें"
+  },
+  "headerNamePlaceholder": {
+    "description": "Header name input placeholder",
+    "message": "नाम"
+  },
+  "headerValuePlaceholder": {
+    "description": "Header value input placeholder",
+    "message": "मान"
+  },
+  "emptyHeaders": {
+    "description": "Empty state for header list",
+    "message": "अभी कोई हेडर नहीं। DevTools से पेस्ट करें या मैन्युअल जोड़ें।"
+  },
+  "deleteHeader": {
+    "description": "Delete row aria label",
+    "message": "हटाएँ"
+  },
+  "toggleHeader": {
+    "description": "Enable/disable single header",
+    "message": "टॉगल"
+  },
+  "clearAll": {
+    "description": "Clear all headers button",
+    "message": "सब साफ़ करें"
+  },
+  "exportJson": {
+    "description": "Export button",
+    "message": "निर्यात"
+  },
+  "importJson": {
+    "description": "Import button",
+    "message": "आयात"
+  },
+  "saved": {
+    "description": "Saved toast",
+    "message": "सहेजा गया"
+  },
+  "importSuccess": {
+    "description": "Import success toast",
+    "message": "$1 हेडर आयात किए गए।"
+  },
+  "importFailed": {
+    "description": "Import failure toast",
+    "message": "आयात विफल। मान्य JSON निर्यात उपयोग करें।"
+  },
+  "cleared": {
+    "description": "Cleared toast",
+    "message": "हेडर साफ़ कर दिए गए।"
+  },
+  "language": {
+    "description": "Language selector label",
+    "message": "भाषा"
+  },
+  "activeCount": {
+    "description": "Count of enabled headers",
+    "message": "$1 सक्रिय"
+  },
+  "loading": {
+    "description": "Loading fallback",
+    "message": "लोड हो रहा है…"
+  },
+  "errorBoundary": {
+    "description": "Error boundary fallback",
+    "message": "कुछ गलत हो गया।"
+  }
+}

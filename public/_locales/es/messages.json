@@ -1,0 +1,126 @@
+{
+  "extensionName": {
+    "description": "Extension name",
+    "message": "Header Modify"
+  },
+  "extensionDescription": {
+    "description": "Extension description",
+    "message": "Modifica los encabezados de solicitud del sitio actual, incluidas las peticiones de iframes."
+  },
+  "popupTitle": {
+    "description": "Popup title",
+    "message": "Header Modify"
+  },
+  "siteUnsupported": {
+    "description": "Shown when the active tab is not http(s)",
+    "message": "Abre una página http(s) para activar la modificación de encabezados."
+  },
+  "enableForSite": {
+    "description": "Main toggle label",
+    "message": "Activar en este sitio"
+  },
+  "enabledHint": {
+    "description": "Hint when site is enabled",
+    "message": "Todas las peticiones de esta pestaña (incluidos iframes) usan tus encabezados."
+  },
+  "disabledHint": {
+    "description": "Hint when site is disabled",
+    "message": "Actívalo para aplicar encabezados en esta pestaña e iframes."
+  },
+  "pasteSectionTitle": {
+    "description": "Paste section heading",
+    "message": "Pegar desde DevTools"
+  },
+  "pastePlaceholder": {
+    "description": "Paste textarea placeholder",
+    "message": "Pega los encabezados copiados de Chrome DevTools…"
+  },
+  "parseMerge": {
+    "description": "Parse and merge button",
+    "message": "Analizar y fusionar"
+  },
+  "parseEmpty": {
+    "description": "Toast when paste is empty",
+    "message": "Primero pega algunos encabezados."
+  },
+  "parseFailed": {
+    "description": "Toast when parse finds nothing",
+    "message": "No se pudo analizar ningún encabezado."
+  },
+  "parseSuccess": {
+    "description": "Toast after successful parse",
+    "message": "Se fusionaron $1 encabezado(s)."
+  },
+  "headersSectionTitle": {
+    "description": "Headers list heading",
+    "message": "Encabezados de solicitud"
+  },
+  "addHeader": {
+    "description": "Add header button",
+    "message": "Añadir"
+  },
+  "headerNamePlaceholder": {
+    "description": "Header name input placeholder",
+    "message": "Nombre"
+  },
+  "headerValuePlaceholder": {
+    "description": "Header value input placeholder",
+    "message": "Valor"
+  },
+  "emptyHeaders": {
+    "description": "Empty state for header list",
+    "message": "Aún no hay encabezados. Pégalos desde DevTools o añádelos manualmente."
+  },
+  "deleteHeader": {
+    "description": "Delete row aria label",
+    "message": "Eliminar"
+  },
+  "toggleHeader": {
+    "description": "Enable/disable single header",
+    "message": "Alternar"
+  },
+  "clearAll": {
+    "description": "Clear all headers button",
+    "message": "Borrar todo"
+  },
+  "exportJson": {
+    "description": "Export button",
+    "message": "Exportar"
+  },
+  "importJson": {
+    "description": "Import button",
+    "message": "Importar"
+  },
+  "saved": {
+    "description": "Saved toast",
+    "message": "Guardado"
+  },
+  "importSuccess": {
+    "description": "Import success toast",
+    "message": "Se importaron $1 encabezado(s)."
+  },
+  "importFailed": {
+    "description": "Import failure toast",
+    "message": "Error al importar. Usa un JSON de exportación válido."
+  },
+  "cleared": {
+    "description": "Cleared toast",
+    "message": "Encabezados borrados."
+  },
+  "language": {
+    "description": "Language selector label",
+    "message": "Idioma"
+  },
+  "activeCount": {
+    "description": "Count of enabled headers",
+    "message": "$1 activos"
+  },
+  "loading": {
+    "description": "Loading fallback",
+    "message": "Cargando…"
+  },
+  "errorBoundary": {
+    "description": "Error boundary fallback",
+    "message": "Algo salió mal."
+  }
+}
