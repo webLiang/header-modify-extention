@@ -41,16 +41,24 @@ docs/chrome-web-store/
 
 ## 图片规格对照
 
-| 资源 | 尺寸 | 必填 | 文件 |
-|------|------|:----:|------|
-| 扩展图标 | 128×128 | ✅ | `images/icon-128.png`（`public/icon-128.png` 同源） |
-| 小宣传图 | 440×280 | ✅ | `images/promo-small-440x280.png` |
-| Marquee | 1400×560 | 推荐 | `images/promo-marquee-1400x560.png` |
-| 截图 | 1280×800 | ✅≥1，最多 5 | `images/screenshot-0*.png` |
+Chrome 网上应用店**不同槽位尺寸不同**，传错槽会报「图片尺寸不正确」。
 
-格式：PNG。宣传图为 RGB 扁平图。
+| 后台字段 | 允许尺寸 | 格式 | 本目录文件 |
+|---|---|---|---|
+| **以当地语言显示的屏幕截图** | **1280×800 或 640×400** | JPEG 或 **24 位 PNG（无透明）**，1～5 张 | 中文 listing → `images/zh-CN/screenshot-0*.jpg`（或 `.png`）<br>默认 English → `images/screenshot-0*.jpg`（或 `.png`） |
+| 小宣传图 | 440×280 | PNG/JPEG | `promo-small-440x280.png` |
+| Marquee 宣传图 | 1400×560 | PNG/JPEG | `promo-marquee-1400x560.png` |
+| 扩展图标 | 128×128 | PNG（**可以有透明**） | `icon-128.png` |
 
-> 截图为**功能示意合成图**（品牌色 + 真实 popup 文案）。若审核偏好「真实浏览器截图」，可用本机 popup 再拍 1～2 张替换 01 / 03。
+**不要把下面这些传到「屏幕截图」槽：**
+
+| 文件 | 实际尺寸 | 为何会被拒 |
+|---|---|---|
+| `promo-marquee-1400x560.png` | 1400×560 | 不是 1280×800 / 640×400 |
+| `promo-small-440x280.png` | 440×280 | 同上 |
+| `icon-128.png` | 128×128，且带 alpha | 尺寸不对 + 截图不允许透明 |
+
+截图文件本身（`screenshot-01`～`05`）已是 **1280×800、8-bit RGB、无 alpha**，符合截图槽要求。若 PNG 仍被后台误判，改传同名 `.jpg`。
 
 ## 语言与 `_locales` 对齐
 
@@ -98,11 +106,15 @@ docs/chrome-web-store/
 
 ## 推荐上传顺序（截图）
 
-1. `screenshot-01-popup-enabled.png` — 核心：按站开关  
-2. `screenshot-02-paste-devtools.png` — DevTools 粘贴  
-3. `screenshot-03-headers-list.png` — 列表编辑  
-4. `screenshot-04-how-it-works.png` — 用法 + 隐私  
-5. `screenshot-05-iframe-scope.png` — iframe 作用域  
+中文 listing 的「以当地语言显示的屏幕截图」请用 `images/zh-CN/`，**只传 5 张**（不要连 promo/icon 一起传）：
+
+1. `screenshot-01-popup-enabled.jpg` — 核心：按站开关  
+2. `screenshot-02-paste-devtools.jpg` — DevTools 粘贴  
+3. `screenshot-03-headers-list.jpg` — 列表编辑  
+4. `screenshot-04-how-it-works.jpg` — 用法 + 隐私  
+5. `screenshot-05-iframe-scope.jpg` — iframe 作用域  
+
+默认 English listing 用目录根下同名文件。`.png` 与 `.jpg` 内容相同，优先 `.jpg` 可避开部分后台对 PNG 的误判。  
 
 ## 重新生成图片
 

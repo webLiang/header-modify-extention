@@ -66,3 +66,23 @@ https://github.com/webLiang/header-modify-extention
 https://github.com/webLiang/header-modify-extention/issues
 https://github.com/webLiang/header-modify-extention/blob/master/PRIVACY.md
 ```
+
+## 6. Official URL site verification (`google*.html`)
+
+Chrome Web Store **Official URL** only lists sites you verified in [Google Search Console](https://search.google.com/search-console). The HTML file Google gave you (`google9d8d8d94157e2aa4.html`) must be served at the **website root**, not inside the extension zip.
+
+This repo already has GitHub Pages (`master` / `/`):
+
+```
+https://webliang.github.io/header-modify-extention/
+```
+
+1. Keep `google9d8d8d94157e2aa4.html` at the **repository root** (do not move it into `public/` or `dist/`).
+2. Commit and push to `master`. Do not change the filename or the one-line body.
+3. Open in a private window (must be public, no login):  
+   https://webliang.github.io/header-modify-extention/google9d8d8d94157e2aa4.html
+4. In Search Console / CWS **Add a new site**, verify this URL prefix:  
+   `https://webliang.github.io/header-modify-extention/`
+5. After it succeeds, pick that URL in the listing **Official URL** dropdown.
+
+HTML-file verification **cannot** prove `https://github.com/webLiang/header-modify-extention` — you do not control `github.com`. Keep the GitHub repo link in the listing description; use the `github.io` site as the verified Official URL.

@@ -31,8 +31,15 @@ def ensure_dirs() -> None:
     STORE_IMAGES.mkdir(parents=True, exist_ok=True)
 
 
-def font(size: int, bold: bool = False) -> ImageFont.ImageFont:
+def font(size: int, bold: bool = False, cjk: bool = False) -> ImageFont.ImageFont:
     candidates = []
+    if cjk:
+        candidates += [
+            "/System/Library/Fonts/STHeiti Medium.ttc" if bold else "/System/Library/Fonts/STHeiti Light.ttc",
+            "/System/Library/Fonts/Hiragino Sans GB.ttc",
+            "/System/Library/Fonts/Supplemental/Songti.ttc",
+            "/Library/Fonts/Arial Unicode.ttf",
+        ]
     if bold:
         candidates += [
             "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
@@ -52,6 +59,27 @@ def font(size: int, bold: bool = False) -> ImageFont.ImageFont:
         except OSError:
             continue
     return ImageFont.load_default()
+
+
+def save_rgb_png(img: Image.Image, path: Path) -> None:
+    """Save 8-bit RGB PNG (no alpha) — required for CWS promo/screenshots."""
+    img.convert("RGB").save(path, format="PNG")
+
+
+def save_screenshot(img: Image.Image, dest_no_suffix: Path) -> None:
+    """Chrome Web Store screenshots: 1280x800, JPEG or 24-bit PNG, no alpha."""
+    rgb = img.convert("RGB")
+    if rgb.size != (1280, 800):
+        raise ValueError(f"screenshot must be 1280x800, got {rgb.size}")
+    dest_no_suffix.parent.mkdir(parents=True, exist_ok=True)
+    rgb.save(dest_no_suffix.with_suffix(".png"), format="PNG")
+    rgb.save(
+        dest_no_suffix.with_suffix(".jpg"),
+        format="JPEG",
+        quality=92,
+        subsampling=0,
+        optimize=True,
+    )
 
 
 def lerp(a: tuple[int, int, int], b: tuple[int, int, int], t: float) -> tuple[int, int, int]:
@@ -228,7 +256,7 @@ def make_promo_small(icon: Image.Image) -> None:
     draw.text((140, 78), "Header Modify", font=font(34, bold=True), fill=WHITE)
     draw.text((140, 130), "Edit request headers per site", font=font(18), fill=(226, 252, 245))
     draw.text((140, 178), "Paste DevTools · iframes included", font=font(14), fill=(167, 243, 208))
-    img.save(STORE_IMAGES / "promo-small-440x280.png")
+    save_rgb_png(img, STORE_IMAGES / "promo-small-440x280.png")
 
 
 def make_promo_marquee(icon: Image.Image) -> None:
@@ -267,123 +295,178 @@ def make_promo_marquee(icon: Image.Image) -> None:
     rounded_rect(draw, (930, 380, 1100, 420), 20, fill=TEAL)
     draw.text((958, 390), "Parse & Merge", font=font(16, bold=True), fill=WHITE)
 
-    img.save(STORE_IMAGES / "promo-marquee-1400x560.png")
+    save_rgb_png(img, STORE_IMAGES / "promo-marquee-1400x560.png")
 
 
-def screenshot_canvas(title: str, subtitle: str) -> tuple[Image.Image, ImageDraw.ImageDraw]:
+def screenshot_canvas(title: str, subtitle: str, cjk: bool = False) -> tuple[Image.Image, ImageDraw.ImageDraw]:
     w, h = 1280, 800
     img = draw_soft_bg((w, h), TEAL_LIGHT)
     draw = ImageDraw.Draw(img)
-    draw.text((64, 48), title, font=font(36, bold=True), fill=SLATE)
-    draw.text((64, 100), subtitle, font=font(20), fill=MUTED)
+    draw.text((64, 48), title, font=font(36, bold=True, cjk=cjk), fill=SLATE)
+    draw.text((64, 100), subtitle, font=font(20, cjk=cjk), fill=MUTED)
     return img, draw
 
 
-def draw_fake_popup(draw: ImageDraw.ImageDraw, box: tuple[int, int, int, int], mode: str) -> None:
+POPUP_COPY = {
+    "en": {
+        "title": "Header Modify",
+        "enable": "Enable for this site",
+        "enableHint": "All requests in this tab (including iframes)",
+        "paste": "Paste from DevTools",
+        "parse": "Parse & Merge",
+        "headers": "Request headers",
+        "parse_btn_w": 160,
+    },
+    "zh_CN": {
+        "title": "请求头修改",
+        "enable": "为当前网站启用",
+        "enableHint": "此标签页内所有请求（含 iframe）",
+        "paste": "从开发者工具粘贴",
+        "parse": "解析并合并",
+        "headers": "请求头列表",
+        "parse_btn_w": 148,
+    },
+}
+
+
+def draw_fake_popup(
+    draw: ImageDraw.ImageDraw,
+    box: tuple[int, int, int, int],
+    mode: str,
+    locale: str = "en",
+) -> None:
+    copy = POPUP_COPY[locale]
+    cjk = locale != "en"
     x0, y0, x1, y1 = box
     rounded_rect(draw, box, 20, fill=WHITE, outline=(226, 232, 240), width=2)
-    draw.text((x0 + 24, y0 + 20), "Header Modify", font=font(22, bold=True), fill=SLATE)
+    draw.text((x0 + 24, y0 + 20), copy["title"], font=font(22, bold=True, cjk=cjk), fill=SLATE)
     draw.text((x0 + 24, y0 + 52), "example.com", font=font(14), fill=MUTED)
 
-    # enable card
     rounded_rect(draw, (x0 + 20, y0 + 85, x1 - 20, y0 + 155), 14, fill=(240, 253, 250), outline=(167, 243, 208))
-    draw.text((x0 + 36, y0 + 100), "Enable for this site", font=font(16, bold=True), fill=SLATE)
-    draw.text((x0 + 36, y0 + 124), "All requests in this tab (including iframes)", font=font(12), fill=MUTED)
+    draw.text((x0 + 36, y0 + 100), copy["enable"], font=font(16, bold=True, cjk=cjk), fill=SLATE)
+    draw.text((x0 + 36, y0 + 124), copy["enableHint"], font=font(12, cjk=cjk), fill=MUTED)
     on = mode != "off"
     rounded_rect(draw, (x1 - 90, y0 + 105, x1 - 36, y0 + 135), 15, fill=TEAL if on else (203, 213, 225))
     knob_x = x1 - 62 if on else x1 - 84
     draw.ellipse((knob_x, y0 + 109, knob_x + 22, y0 + 131), fill=WHITE)
 
     if mode == "paste":
-        draw.text((x0 + 24, y0 + 175), "Paste from DevTools", font=font(15, bold=True), fill=SLATE)
+        draw.text((x0 + 24, y0 + 175), copy["paste"], font=font(15, bold=True, cjk=cjk), fill=SLATE)
         rounded_rect(draw, (x0 + 20, y0 + 205, x1 - 20, y0 + 320), 12, fill=(248, 250, 252), outline=(226, 232, 240))
         lines = ["sec-fetch-user", "?1", "user-agent", "Mozilla/5.0 …"]
         for i, line in enumerate(lines):
             draw.text((x0 + 36, y0 + 218 + i * 24), line, font=font(13), fill=SLATE if i % 2 == 0 else MUTED)
-        rounded_rect(draw, (x0 + 20, y0 + 340, x0 + 160, y0 + 378), 18, fill=TEAL)
-        draw.text((x0 + 40, y0 + 350), "Parse & Merge", font=font(14, bold=True), fill=WHITE)
-    else:
-        draw.text((x0 + 24, y0 + 175), "Request headers", font=font(15, bold=True), fill=SLATE)
-        rows = [
-            ("user-agent", "Mozilla/5.0 Custom/1.0"),
-            ("x-debug", "1"),
-            ("accept-language", "en-US,en;q=0.9"),
-        ]
-        for i, (name, value) in enumerate(rows):
-            y = y0 + 205 + i * 52
-            draw.ellipse((x0 + 28, y + 10, x0 + 42, y + 24), outline=TEAL, width=2)
-            draw.ellipse((x0 + 31, y + 13, x0 + 39, y + 21), fill=TEAL)
-            rounded_rect(draw, (x0 + 54, y, x0 + 170, y + 34), 8, fill=(248, 250, 252), outline=(226, 232, 240))
-            draw.text((x0 + 62, y + 8), name, font=font(12), fill=SLATE)
-            rounded_rect(draw, (x0 + 180, y, x1 - 28, y + 34), 8, fill=(248, 250, 252), outline=(226, 232, 240))
-            draw.text((x0 + 188, y + 8), value[:28], font=font(12), fill=MUTED)
+        btn_w = int(copy["parse_btn_w"])
+        rounded_rect(draw, (x0 + 20, y0 + 340, x0 + 20 + btn_w, y0 + 378), 18, fill=TEAL)
+        draw.text((x0 + 40, y0 + 350), copy["parse"], font=font(14, bold=True, cjk=cjk), fill=WHITE)
+        return
 
-
-def make_screenshots() -> None:
-    # 01 enabled
-    img, draw = screenshot_canvas("Enable for this site", "Turn on rewriting for the current origin — badge shows ON")
-    draw_fake_popup(draw, (360, 160, 920, 700), mode="list")
-    img.save(STORE_IMAGES / "screenshot-01-popup-enabled.png")
-
-    # 02 paste
-    img, draw = screenshot_canvas("Paste from Chrome DevTools", "Alternate name/value lines, Name: Value, or cURL -H")
-    draw_fake_popup(draw, (360, 160, 920, 700), mode="paste")
-    img.save(STORE_IMAGES / "screenshot-02-paste-devtools.png")
-
-    # 03 list
-    img, draw = screenshot_canvas("Edit request headers", "Add, toggle, or delete headers — set means add or replace")
-    draw_fake_popup(draw, (360, 160, 920, 700), mode="list")
-    img.save(STORE_IMAGES / "screenshot-03-headers-list.png")
-
-    # 04 how it works
-    img, draw = screenshot_canvas("How it works", "Open source · local-only settings · Manifest V3 DNR")
-    steps = [
-        ("1", "Open an http(s) page"),
-        ("2", "Paste or add headers"),
-        ("3", "Enable for this site"),
-        ("4", "Reload & inspect Network"),
+    draw.text((x0 + 24, y0 + 175), copy["headers"], font=font(15, bold=True, cjk=cjk), fill=SLATE)
+    rows = [
+        ("user-agent", "Mozilla/5.0 Custom/1.0"),
+        ("x-debug", "1"),
+        ("accept-language", "en-US,en;q=0.9"),
     ]
-    for i, (n, text) in enumerate(steps):
+    for i, (name, value) in enumerate(rows):
+        y = y0 + 205 + i * 52
+        draw.ellipse((x0 + 28, y + 10, x0 + 42, y + 24), outline=TEAL, width=2)
+        draw.ellipse((x0 + 31, y + 13, x0 + 39, y + 21), fill=TEAL)
+        rounded_rect(draw, (x0 + 54, y, x0 + 170, y + 34), 8, fill=(248, 250, 252), outline=(226, 232, 240))
+        draw.text((x0 + 62, y + 8), name, font=font(12), fill=SLATE)
+        rounded_rect(draw, (x0 + 180, y, x1 - 28, y + 34), 8, fill=(248, 250, 252), outline=(226, 232, 240))
+        draw.text((x0 + 188, y + 8), value[:28], font=font(12), fill=MUTED)
+
+
+SCREENSHOT_COPY = {
+    "en": {
+        "01": ("Enable for this site", "Turn on rewriting for the current origin — badge shows ON"),
+        "02": ("Paste from Chrome DevTools", "Alternate name/value lines, Name: Value, or cURL -H"),
+        "03": ("Edit request headers", "Add, toggle, or delete headers — set means add or replace"),
+        "04": ("How it works", "Open source · local-only settings · Manifest V3 DNR"),
+        "04_steps": [
+            ("1", "Open an http(s) page"),
+            ("2", "Paste or add headers"),
+            ("3", "Enable for this site"),
+            ("4", "Reload & inspect Network"),
+        ],
+        "privacy": "Privacy",
+        "privacy_body": "No remote collection. Headers and enabled sites stay in chrome.storage.local on your device.",
+        "05": ("Includes iframe requests", "Session rules use tabIds — main frame, sub_frame, XHR, fetch, media…"),
+        "05_main": "Main page requests → headers applied",
+        "05_iframe": "Cross-origin iframe",
+        "05_iframe_body": "cdn.video.example / player.js / xhr — same tab, same rules",
+        "05_tech": "declarativeNetRequest session rule · tabIds",
+    },
+    "zh_CN": {
+        "01": ("为当前网站启用", "打开当前站点的请求头改写，开关显示为已开启"),
+        "02": ("从 Chrome 开发者工具粘贴", "支持名称/值交替行、Name: Value 或 cURL -H"),
+        "03": ("编辑请求头", "添加、开关或删除；set 表示没有则添加、有则覆盖"),
+        "04": ("工作原理", "开源 · 仅本地保存设置 · Manifest V3 DNR"),
+        "04_steps": [
+            ("1", "打开 http(s) 页面"),
+            ("2", "粘贴或添加请求头"),
+            ("3", "为当前网站启用"),
+            ("4", "刷新并查看 Network"),
+        ],
+        "privacy": "隐私",
+        "privacy_body": "不收集远程数据。请求头与启用站点仅保存在本机 chrome.storage.local。",
+        "05": ("包含 iframe 请求", "Session 规则按 tabIds 生效：主框架、子框架、XHR、fetch、媒体…"),
+        "05_main": "主页面请求 → 已应用请求头",
+        "05_iframe": "跨域 iframe",
+        "05_iframe_body": "cdn.video.example / player.js / xhr — 同一标签页，同一套规则",
+        "05_tech": "declarativeNetRequest session 规则 · tabIds",
+    },
+}
+
+
+def make_screenshots(locale: str = "en") -> None:
+    copy = SCREENSHOT_COPY[locale]
+    cjk = locale != "en"
+    out_dir = STORE_IMAGES if locale == "en" else STORE_IMAGES / "zh-CN"
+
+    img, draw = screenshot_canvas(*copy["01"], cjk=cjk)
+    draw_fake_popup(draw, (360, 160, 920, 700), mode="list", locale=locale)
+    save_screenshot(img, out_dir / "screenshot-01-popup-enabled")
+
+    img, draw = screenshot_canvas(*copy["02"], cjk=cjk)
+    draw_fake_popup(draw, (360, 160, 920, 700), mode="paste", locale=locale)
+    save_screenshot(img, out_dir / "screenshot-02-paste-devtools")
+
+    img, draw = screenshot_canvas(*copy["03"], cjk=cjk)
+    draw_fake_popup(draw, (360, 160, 920, 700), mode="list", locale=locale)
+    save_screenshot(img, out_dir / "screenshot-03-headers-list")
+
+    img, draw = screenshot_canvas(*copy["04"], cjk=cjk)
+    for i, (n, text) in enumerate(copy["04_steps"]):
         x = 100 + i * 280
         rounded_rect(draw, (x, 220, x + 240, 420), 18, fill=WHITE, outline=(226, 232, 240))
         draw.ellipse((x + 90, 250, x + 150, 310), fill=TEAL_SOFT)
         draw.text((x + 108, 262), n, font=font(28, bold=True), fill=TEAL)
-        draw.text((x + 28, 340), text, font=font(16, bold=True), fill=SLATE)
+        draw.text((x + 28, 340), text, font=font(16, bold=True, cjk=cjk), fill=SLATE)
     rounded_rect(draw, (100, 480, 1180, 700), 18, fill=WHITE, outline=(226, 232, 240))
-    draw.text((140, 520), "Privacy", font=font(22, bold=True), fill=SLATE)
-    draw.text(
-        (140, 570),
-        "No remote collection. Headers and enabled sites stay in chrome.storage.local on your device.",
-        font=font(18),
-        fill=MUTED,
-    )
+    draw.text((140, 520), copy["privacy"], font=font(22, bold=True, cjk=cjk), fill=SLATE)
+    draw.text((140, 570), copy["privacy_body"], font=font(18, cjk=cjk), fill=MUTED)
     draw.text(
         (140, 620),
         "GitHub: https://github.com/webLiang/header-modify-extention",
         font=font(18),
         fill=TEAL,
     )
-    img.save(STORE_IMAGES / "screenshot-04-how-it-works.png")
+    save_screenshot(img, out_dir / "screenshot-04-how-it-works")
 
-    # 05 iframe scope
-    img, draw = screenshot_canvas(
-        "Includes iframe requests",
-        "Session rules use tabIds — main frame, sub_frame, XHR, fetch, media…",
-    )
-    # browser chrome
+    img, draw = screenshot_canvas(*copy["05"], cjk=cjk)
     rounded_rect(draw, (160, 180, 1120, 700), 16, fill=WHITE, outline=(203, 213, 225), width=2)
     rounded_rect(draw, (160, 180, 1120, 230), 16, fill=(248, 250, 252))
     draw.rectangle((160, 214, 1120, 230), fill=(248, 250, 252))
     draw.text((190, 194), "https://example.com/player", font=font(16), fill=MUTED)
-    # main + iframe
     rounded_rect(draw, (200, 260, 1080, 420), 12, fill=(240, 253, 250), outline=TEAL)
-    draw.text((220, 280), "Main page requests → headers applied", font=font(18, bold=True), fill=TEAL)
+    draw.text((220, 280), copy["05_main"], font=font(18, bold=True, cjk=cjk), fill=TEAL)
     draw.text((220, 320), "GET /api/stream  ·  user-agent: Custom/1.0", font=font(15), fill=SLATE)
     rounded_rect(draw, (240, 460, 1040, 660), 12, fill=(239, 246, 255), outline=(59, 130, 246))
-    draw.text((260, 490), "Cross-origin iframe", font=font(18, bold=True), fill=(37, 99, 235))
-    draw.text((260, 540), "cdn.video.example / player.js / xhr — same tab, same rules", font=font(15), fill=SLATE)
-    draw.text((260, 590), "declarativeNetRequest session rule · tabIds", font=font(14), fill=MUTED)
-    img.save(STORE_IMAGES / "screenshot-05-iframe-scope.png")
+    draw.text((260, 490), copy["05_iframe"], font=font(18, bold=True, cjk=cjk), fill=(37, 99, 235))
+    draw.text((260, 540), copy["05_iframe_body"], font=font(15, cjk=cjk), fill=SLATE)
+    draw.text((260, 590), copy["05_tech"], font=font(14, cjk=cjk), fill=MUTED)
+    save_screenshot(img, out_dir / "screenshot-05-iframe-scope")
 
 
 def main() -> None:
@@ -393,11 +476,13 @@ def main() -> None:
     write_logo_svg()
     make_promo_small(icon128)
     make_promo_marquee(icon128)
-    make_screenshots()
+    make_screenshots("en")
+    make_screenshots("zh_CN")
     print("Generated icons + store images under:")
     print(f"  {PUBLIC}")
     print(f"  {ASSETS_IMG / 'logo.svg'}")
     print(f"  {STORE_IMAGES}")
+    print(f"  {STORE_IMAGES / 'zh-CN'}  (Chinese listing screenshots)")
 
 
 if __name__ == "__main__":

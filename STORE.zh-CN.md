@@ -64,3 +64,23 @@ https://github.com/webLiang/header-modify-extention
 https://github.com/webLiang/header-modify-extention/issues
 https://github.com/webLiang/header-modify-extention/blob/master/PRIVACY.zh-CN.md
 ```
+
+## 6. 官方网址验证（`google*.html`）
+
+商店 **官方网址** 下拉框里，只能选你已在 [Google Search Console](https://search.google.com/search-console) 验证过的站点。Google 给你的 `google9d8d8d94157e2aa4.html` 必须能在**网站根路径**直接打开，**不要**打进扩展 zip。
+
+本仓库已开启 GitHub Pages（`master` 分支根目录）：
+
+```
+https://webliang.github.io/header-modify-extention/
+```
+
+1. 文件放在**仓库根目录**（不要放进 `public/` / `dist/`）。
+2. 提交并 push 到 `master`。文件名和那一行内容都不要改。
+3. 用无痕窗口打开（必须公开、不用登录）：  
+   https://webliang.github.io/header-modify-extention/google9d8d8d94157e2aa4.html
+4. Search Console / 商店后台 **添加新网站** 时，验证这个 URL 前缀：  
+   `https://webliang.github.io/header-modify-extention/`
+5. 通过后，在 listing 的 **官方网址** 里选这个 `github.io` 地址。
+
+HTML 文件验证**无法**证明 `https://github.com/webLiang/header-modify-extention`（你控制不了 `github.com`）。仓库链接继续写在商店详情里即可；已验证的官方网址用 Pages 站点。
