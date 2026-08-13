@@ -1,0 +1,126 @@
+{
+  "extensionName": {
+    "description": "Extension name",
+    "message": "Header Modify"
+  },
+  "extensionDescription": {
+    "description": "Extension description",
+    "message": "Modify request headers for the current site, including iframe requests."
+  },
+  "popupTitle": {
+    "description": "Popup title",
+    "message": "Header Modify"
+  },
+  "siteUnsupported": {
+    "description": "Shown when the active tab is not http(s)",
+    "message": "Open an http(s) page to enable header rewriting."
+  },
+  "enableForSite": {
+    "description": "Main toggle label",
+    "message": "Enable for this site"
+  },
+  "enabledHint": {
+    "description": "Hint when site is enabled",
+    "message": "All requests in this tab (including iframes) use your headers."
+  },
+  "disabledHint": {
+    "description": "Hint when site is disabled",
+    "message": "Turn on to apply headers on this site’s tab and iframes."
+  },
+  "pasteSectionTitle": {
+    "description": "Paste section heading",
+    "message": "Paste from DevTools"
+  },
+  "pastePlaceholder": {
+    "description": "Paste textarea placeholder",
+    "message": "Paste request headers copied from Chrome DevTools…"
+  },
+  "parseMerge": {
+    "description": "Parse and merge button",
+    "message": "Parse & Merge"
+  },
+  "parseEmpty": {
+    "description": "Toast when paste is empty",
+    "message": "Paste some headers first."
+  },
+  "parseFailed": {
+    "description": "Toast when parse finds nothing",
+    "message": "Could not parse any headers."
+  },
+  "parseSuccess": {
+    "description": "Toast after successful parse",
+    "message": "Merged $1 header(s)."
+  },
+  "headersSectionTitle": {
+    "description": "Headers list heading",
+    "message": "Request headers"
+  },
+  "addHeader": {
+    "description": "Add header button",
+    "message": "Add"
+  },
+  "headerNamePlaceholder": {
+    "description": "Header name input placeholder",
+    "message": "Name"
+  },
+  "headerValuePlaceholder": {
+    "description": "Header value input placeholder",
+    "message": "Value"
+  },
+  "emptyHeaders": {
+    "description": "Empty state for header list",
+    "message": "No headers yet. Paste from DevTools or add one manually."
+  },
+  "deleteHeader": {
+    "description": "Delete row aria label",
+    "message": "Delete"
+  },
+  "toggleHeader": {
+    "description": "Enable/disable single header",
+    "message": "Toggle"
+  },
+  "clearAll": {
+    "description": "Clear all headers button",
+    "message": "Clear all"
+  },
+  "exportJson": {
+    "description": "Export button",
+    "message": "Export"
+  },
+  "importJson": {
+    "description": "Import button",
+    "message": "Import"
+  },
+  "saved": {
+    "description": "Saved toast",
+    "message": "Saved"
+  },
+  "importSuccess": {
+    "description": "Import success toast",
+    "message": "Imported $1 header(s)."
+  },
+  "importFailed": {
+    "description": "Import failure toast",
+    "message": "Import failed. Use a valid JSON export."
+  },
+  "cleared": {
+    "description": "Cleared toast",
+    "message": "Headers cleared."
+  },
+  "language": {
+    "description": "Language selector label",
+    "message": "Language"
+  },
+  "activeCount": {
+    "description": "Count of enabled headers",
+    "message": "$1 active"
+  },
+  "loading": {
+    "description": "Loading fallback",
+    "message": "Loading…"
+  },
+  "errorBoundary": {
+    "description": "Error boundary fallback",
+    "message": "Something went wrong."
+  }
+}
