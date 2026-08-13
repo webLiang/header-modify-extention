@@ -4,6 +4,7 @@ Compared to `v1.0.0`.
 
 ### Changes
 
+- **feat(repo): update version to 1.1.0 and enhance User-Agent handling in documentation** (`837c8a0`)
 - **feat(docs/chrome-web-store): add site verification instructions and new screenshot assets** (`9d21ef1`)
 - **feat(repo): add preview images and usage instructions to README files** (`dae0e68`)
 
