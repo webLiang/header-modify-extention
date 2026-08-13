@@ -5,6 +5,10 @@
 - **English** (current)：[README.md](README.md)
 - **中文**：[README.zh_CN.md](README.zh_CN.md)
 
+<p align="center">
+  <img src="docs/chrome-web-store/images/promo-marquee-1400x560.png" alt="Header Modify — rewrite HTTP request headers for the current site" width="840">
+</p>
+
 Chrome extension that **rewrites request headers** for the current site. When enabled, every request from that tab — including **iframe / XHR / fetch / media** — gets your headers applied with **set** semantics (add if missing, replace if present).
 
 > **Built with:** [chrome-extension-boilerplate-react-vite](https://github.com/webLiang/chrome-extension-boilerplate-react-vite) — a React + **Vite 8** Manifest V3 boilerplate with **faster builds**. This extension is developed on top of that template. **Stars** and **Merge Requests** are welcome.
@@ -30,6 +34,28 @@ Regenerate icons / store images:
 pnpm assets:store
 pnpm build
 ```
+
+---
+
+## Preview
+
+**Enable for this site** — turn rewriting on for the current origin. Rows below are applied with *set* semantics (add if missing, replace if present).
+
+<p align="center">
+  <img src="docs/chrome-web-store/images/screenshot-01-popup-enabled.png" alt="Popup: Enable for this site is on, with user-agent, x-debug, and accept-language rows" width="840">
+</p>
+
+**Paste from DevTools** — copy headers from Chrome Network (name/value lines, `Name: Value`, or cURL `-H`), paste, then **Parse & Merge**.
+
+<p align="center">
+  <img src="docs/chrome-web-store/images/screenshot-02-paste-devtools.png" alt="Popup: paste DevTools headers and Parse & Merge" width="840">
+</p>
+
+**Includes iframes** — session rules are scoped by `tabIds`, so the main page, cross-origin iframes, XHR, fetch, and media in that tab all get the same headers.
+
+<p align="center">
+  <img src="docs/chrome-web-store/images/screenshot-05-iframe-scope.png" alt="Diagram: same tab rules apply to main-page and cross-origin iframe requests" width="840">
+</p>
 
 ---
 
@@ -78,6 +104,10 @@ pnpm dev
 ---
 
 ## Usage
+
+<p align="center">
+  <img src="docs/chrome-web-store/images/screenshot-04-how-it-works.png" alt="How it works: open a page, paste headers, enable for this site, reload and inspect Network" width="840">
+</p>
 
 1. Open a normal `http(s)` page.
 2. Click the extension icon.

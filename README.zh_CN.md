@@ -5,6 +5,10 @@
 - **English**：[README.md](README.md)
 - **中文**（当前）：[README.zh_CN.md](README.zh_CN.md)
 
+<p align="center">
+  <img src="docs/chrome-web-store/images/promo-marquee-1400x560.png" alt="Header Modify — 为当前网站改写 HTTP 请求头" width="840">
+</p>
+
 用于**改写当前网站请求头**的 Chrome 扩展。启用后，该标签页内的请求（含 **iframe / XHR / fetch / 媒体**）都会应用你配置的请求头；语义为 **set**（没有则添加，有则覆盖）。
 
 > **基于模板：** [chrome-extension-boilerplate-react-vite](https://github.com/webLiang/chrome-extension-boilerplate-react-vite) — React + **Vite 8** 的 Manifest V3 脚手架，构建更快。欢迎 **Star** 与 **Merge Request**。
@@ -30,6 +34,28 @@ pnpm zip   # → releases/header-modify-extention_v{version}.zip
 pnpm assets:store
 pnpm build
 ```
+
+---
+
+## 界面演示
+
+**为当前网站启用** — 按 origin 打开改写。下面列表里的请求头按 *set* 语义生效（没有则添加，有则覆盖）。
+
+<p align="center">
+  <img src="docs/chrome-web-store/images/screenshot-01-popup-enabled.png" alt="弹窗：已为当前站点启用，并列出 user-agent / x-debug / accept-language" width="840">
+</p>
+
+**从 DevTools 粘贴** — 从 Chrome Network 复制请求头（名称/值交替行、`Name: Value` 或 cURL `-H`），粘贴后点 **Parse & Merge**。
+
+<p align="center">
+  <img src="docs/chrome-web-store/images/screenshot-02-paste-devtools.png" alt="弹窗：粘贴 DevTools 请求头并 Parse & Merge" width="840">
+</p>
+
+**包含 iframe** — session 规则按 `tabIds` 作用在当前标签页，主文档、跨域 iframe、XHR、fetch、媒体请求都会带上同一套请求头。
+
+<p align="center">
+  <img src="docs/chrome-web-store/images/screenshot-05-iframe-scope.png" alt="示意图：同一标签页内主页面与跨域 iframe 请求都应用相同规则" width="840">
+</p>
 
 ---
 
@@ -78,6 +104,10 @@ pnpm dev
 ---
 
 ## 使用
+
+<p align="center">
+  <img src="docs/chrome-web-store/images/screenshot-04-how-it-works.png" alt="使用步骤：打开页面、粘贴请求头、为当前站点启用、刷新并在 Network 中检查" width="840">
+</p>
 
 1. 打开普通 `http(s)` 页面。
 2. 点击扩展图标。
