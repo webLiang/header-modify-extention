@@ -19,4 +19,7 @@ export const ALL_RESOURCE_TYPES = [
 /** Stable base for session rule ids (one rule per tab). */
 export const DNR_RULE_ID_BASE = 10_000;
 
+/** Session rules keyed by enabled origin host (covers Service Worker requests, which have no tabId). */
+export const DNR_ORIGIN_RULE_ID_BASE = 200_000;
+
 export const STORAGE_KEY = 'header_modify_state';

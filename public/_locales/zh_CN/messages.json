@@ -122,5 +122,9 @@
   "errorBoundary": {
     "description": "Error boundary fallback",
     "message": "出现错误。"
+  },
+  "userAgentHint": {
+    "description": "Shown when User-Agent is enabled",
+    "message": "改写 User-Agent 时会同时去掉 Sec-CH-UA，否则网站仍按真实浏览器识别。开发者工具可能仍显示原 UA（Provisional headers）；页面里的 navigator.userAgent 不会变。"
   }
 }

@@ -78,9 +78,13 @@ Manifest V3 不能使用阻塞式 `webRequest`。本扩展使用：
 
 `modifyHeaders` + `operation: "set"`。
 
-通过 `condition.tabIds` 覆盖该标签页内各类资源。请求头与启用站点存于 `chrome.storage.local`；标签页或配置变化时重建 session 规则。
+规则同时用 `condition.tabIds`（标签页内请求）和 `initiatorDomains`（站点 Service Worker / Turbo 拉 HTML 时没有 tabId，否则会漏改）。请求头与启用站点存于 `chrome.storage.local`；标签页或配置变化时重建 session 规则。
 
-**说明：** 部分受保护请求头可能无法被 Chrome 修改，具体以浏览器版本为准。
+**User-Agent：** Chrome 还会发送 **User-Agent Client Hints**（`Sec-CH-UA`、`Sec-CH-UA-Platform` 等）。很多网站不看 `User-Agent` 字符串，而以这些提示为准。设置 `User-Agent` 时，本扩展会**去掉**这些 hint，改写才可能生效。
+
+**开发者工具：** Network 里若出现 “Provisional headers are shown”，显示的仍可能是原 UA。请用服务端回显（如 https://httpbin.org/headers）或非 provisional 的请求核对。页面 JS 的 `navigator.userAgent` **不会**被 DNR 改掉。
+
+**受保护请求头：** Chrome 不能 SET `Host`、`Content-Length`、`Sec-Fetch-*` 等。这些项会被跳过，以免整条规则失败（连 User-Agent 一起失效）。
 
 ---
 

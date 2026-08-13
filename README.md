@@ -78,9 +78,13 @@ Manifest V3 cannot use blocking `webRequest`. This extension uses:
 
 with `action.type = "modifyHeaders"` and `operation: "set"`.
 
-Rules are scoped with `condition.tabIds` so all resource types inside the enabled tab are covered. Header lists and enabled origins persist in `chrome.storage.local`; session rules are rebuilt when tabs or settings change.
+Rules use `condition.tabIds` for in-tab requests, plus `initiatorDomains` so Service Worker / Turbo document fetches (no tabId) still match. Header lists and enabled origins persist in `chrome.storage.local`; session rules are rebuilt when tabs or settings change.
 
-**Note:** Chrome may still reject modification of some protected headers. Behavior can vary by browser version.
+**User-Agent:** Chrome also sends **User-Agent Client Hints** (`Sec-CH-UA`, `Sec-CH-UA-Platform`, …). Many sites ignore the `User-Agent` string and use those hints instead. When you set `User-Agent`, this extension **removes** those hint headers so the override can take effect.
+
+**DevTools:** Network may still show the original UA under “Provisional headers are shown”. Check the server (e.g. https://httpbin.org/headers) or a request that is not marked provisional. `navigator.userAgent` in page JavaScript is **not** changed by DNR.
+
+**Protected headers:** Chrome will not SET hop-by-hop / fetch-metadata names such as `Host`, `Content-Length`, or `Sec-Fetch-*`. Those rows are skipped so they do not fail the whole rule (including User-Agent).
 
 ---
 

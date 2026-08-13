@@ -15,6 +15,25 @@ The extension is fully open source. Reviewers (and users) can audit the package 
 
 This is a single, focused open-source developer utility. It does not replace the new tab page, inject ads, change search, download media, or provide unrelated features.
 
+### 商店后台在哪填？
+
+Chrome 开发者信息中心 **没有** 名叫「单一用途」的独立输入框。你看到的是 [单一用途政策](https://developer.chrome.com/docs/webstore/program-policies/quality-guidelines-faq#single-purpose) 提示，审核会对照下面几处是否只讲一件事：
+
+| 后台位置 | 贴哪段 |
+|---|---|
+| **商店信息 → 详细说明**（必填，审核主要看这里） | `LISTING.zh-CN.md` / `LISTING.en.md` 里的 **【单一用途】 / SINGLE PURPOSE** 整段 |
+| **商店信息 → 名称 / 简短说明** | 名称：`请求头修改` / `Header Modify`；短描述见同文件（只写改请求头） |
+| **隐私权 / 权限说明**（若有自由文本） | 下面「可贴中文」 |
+| 审核邮件回复 | 文末 one-paragraph reply |
+
+分类选 **Developer Tools（开发者工具）**。
+
+### 可贴中文（问卷 / 权限说明自由文本）
+
+```
+本扩展只有一个用途：在用户明确启用的网站上，通过 Manifest V3 declarativeNetRequest modifyHeaders（set：没有则添加、有则覆盖），改写该标签页发出的 HTTP 请求头（含 iframe）。默认全部站点关闭。不做新标签页替换、广告、搜索劫持、媒体下载或其它无关功能。开源仓库：https://github.com/webLiang/header-modify-extention
+```
+
 ## Why broad host access (`<all_urls>`)
 
 Modifying request headers (especially for cross-origin iframe / XHR / fetch targets) requires host permissions for the request URL. Users may enable the tool on arbitrary sites during legitimate debugging, so host access cannot be limited to a fixed allowlist of domains in the manifest.

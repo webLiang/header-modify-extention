@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { mergeParsedHeaders, originFromUrl, parseRequestHeaders } from './parseRequestHeaders';
+import {
+  hostnameFromOrigin,
+  mergeParsedHeaders,
+  originFromUrl,
+  parseRequestHeaders,
+} from './parseRequestHeaders';
 import { buildModifyHeaderInfos } from '@pages/background/services/buildModifyHeaderInfos';
 
 describe('parseRequestHeaders', () => {
@@ -60,13 +65,35 @@ describe('originFromUrl', () => {
   });
 });
 
+describe('hostnameFromOrigin', () => {
+  it('returns hostname without port', () => {
+    expect(hostnameFromOrigin('https://github.com')).toBe('github.com');
+  });
+});
+
 describe('buildModifyHeaderInfos', () => {
   it('builds set operations for enabled headers only', () => {
     const infos = buildModifyHeaderInfos([
-      { id: '1', name: 'User-Agent', value: 'A', enabled: true },
+      { id: '1', name: 'X-Debug', value: 'A', enabled: true },
       { id: '2', name: 'X-Skip', value: 'B', enabled: false },
       { id: '3', name: '', value: 'C', enabled: true },
     ]);
-    expect(infos).toEqual([{ header: 'User-Agent', operation: 'set', value: 'A' }]);
+    expect(infos).toEqual([{ header: 'X-Debug', operation: 'set', value: 'A' }]);
+  });
+
+  it('skips browser-owned headers that Chrome cannot SET', () => {
+    const infos = buildModifyHeaderInfos([
+      { id: '1', name: 'sec-fetch-user', value: '?1', enabled: true },
+      { id: '2', name: 'Host', value: 'example.com', enabled: true },
+      { id: '3', name: 'X-Debug', value: '1', enabled: true },
+    ]);
+    expect(infos).toEqual([{ header: 'X-Debug', operation: 'set', value: '1' }]);
+  });
+
+  it('removes UA Client Hints when User-Agent is set', () => {
+    const infos = buildModifyHeaderInfos([{ id: '1', name: 'User-Agent', value: 'CustomBot/1.0', enabled: true }]);
+    expect(infos[0]).toEqual({ header: 'User-Agent', operation: 'set', value: 'CustomBot/1.0' });
+    expect(infos.some(item => item.header === 'sec-ch-ua' && item.operation === 'remove')).toBe(true);
+    expect(infos.some(item => item.header === 'sec-ch-ua-platform' && item.operation === 'remove')).toBe(true);
   });
 });

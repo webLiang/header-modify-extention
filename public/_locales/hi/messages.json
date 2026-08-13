@@ -122,5 +122,9 @@
   "errorBoundary": {
     "description": "Error boundary fallback",
     "message": "कुछ गलत हो गया।"
+  },
+  "userAgentHint": {
+    "description": "Shown when User-Agent is enabled",
+    "message": "User-Agent सेट करने पर Sec-CH-UA client hints भी हटाए जाते हैं ताकि सर्वर इस मान को माने। DevTools मूल UA दिखा सकता है; पेज का navigator.userAgent नहीं बदलता।"
   }
 }

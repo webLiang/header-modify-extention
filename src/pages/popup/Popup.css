@@ -351,6 +351,16 @@ body {
   border-radius: 10px;
 }
 
+.hm-hint {
+  margin: 0 0 8px;
+  padding: 8px 10px;
+  font-size: 11px;
+  line-height: 1.45;
+  color: var(--hm-muted);
+  background: var(--hm-accent-soft);
+  border-radius: 10px;
+}
+
 .hm-footer {
   margin-top: auto;
   display: flex;

@@ -89,6 +89,13 @@ const THEME_HIGHLIGHTS = {
     ar: 'لغات الواجهة: English و中文 وEspañol والعربية وहिन्दी.',
     hi: 'UI भाषाएँ: English, 中文, Español, العربية, हिन्दी।',
   },
+  userAgent: {
+    en: 'User-Agent overrides strip Client Hints (Sec-CH-UA*) and now apply to Service Worker / Turbo document requests, not only in-tab XHR.',
+    zh_CN: '改写 User-Agent 时会去掉 Client Hints（Sec-CH-UA*），并覆盖 Service Worker / Turbo 的页面请求，不只是标签页内的 XHR。',
+    es: 'Al anular User-Agent se eliminan las Client Hints (Sec-CH-UA*) y ahora también se aplica a peticiones de documento de Service Worker / Turbo, no solo a XHR de la pestaña.',
+    ar: 'عند تجاوز User-Agent تُزال تلميحات العميل (Sec-CH-UA*) وتُطبَّق الآن على طلبات المستند من Service Worker / Turbo وليس فقط على XHR داخل علامة التبويب.',
+    hi: 'User-Agent ओवरराइड Sec-CH-UA* Client Hints हटाता है, और अब केवल टैब XHR नहीं बल्कि Service Worker / Turbo दस्तावेज़ अनुरोधों पर भी लागू होता है।',
+  },
 };
 
 /** Map i18n message keys to release themes (used with locale diffs vs previous tag). */
@@ -106,6 +113,7 @@ const KEY_TO_THEME = {
   exportJson: 'exportImport',
   importJson: 'exportImport',
   language: 'i18n',
+  userAgentHint: 'userAgent',
 };
 
 /** Match commit subject/body text to release themes. */
@@ -116,6 +124,7 @@ const COMMIT_THEME_RULES = [
   { theme: 'headerEditor', test: /header.*edit|toggle.*header|addHeader|popup/i },
   { theme: 'exportImport', test: /export|import.*json/i },
   { theme: 'i18n', test: /i18n|locale|language|_locales/i },
+  { theme: 'userAgent', test: /user-agent|sec-ch-ua|client hint|initiatorDomains|service worker/i },
 ];
 
 /** @typedef {{ notesFile?: string, bodyFile?: string, assets: string[], dryRun: boolean, publish: boolean, skipBuild: boolean, commit: boolean, push: boolean, title?: string, commitMessage?: string }} CliOptions */

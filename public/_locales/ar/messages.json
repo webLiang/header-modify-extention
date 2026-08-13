@@ -122,5 +122,9 @@
   "errorBoundary": {
     "description": "Error boundary fallback",
     "message": "حدث خطأ ما."
+  },
+  "userAgentHint": {
+    "description": "Shown when User-Agent is enabled",
+    "message": "عند تعيين User-Agent تُحذف أيضًا تلميحات Sec-CH-UA حتى يحترم الخادم القيمة. قد تظل أدوات المطوّر تعرض الـ UA الأصلي؛ ولن يتغيّر navigator.userAgent في الصفحة."
   }
 }

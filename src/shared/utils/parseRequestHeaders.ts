@@ -118,3 +118,12 @@ export function originFromUrl(url: string | undefined): string {
     return '';
   }
 }
+
+/** Hostname for DNR initiatorDomains (no port). */
+export function hostnameFromOrigin(origin: string): string {
+  try {
+    return new URL(origin).hostname;
+  } catch {
+    return '';
+  }
+}

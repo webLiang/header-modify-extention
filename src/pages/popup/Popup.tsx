@@ -82,6 +82,10 @@ const Popup = () => {
 
   const siteEnabled = Boolean(tab?.origin && state.enabledOrigins.includes(tab.origin));
   const activeCount = useMemo(() => headers.filter(h => h.enabled).length, [headers]);
+  const hasUserAgent = useMemo(
+    () => headers.some(h => h.enabled && h.name.trim().toLowerCase() === 'user-agent'),
+    [headers],
+  );
 
   /** Persist header list and debounce a sync + toast. */
   const persistHeaders = (next: HeaderEntry[], notify = true) => {
@@ -268,6 +272,8 @@ const Popup = () => {
           <h2>{translate('headersSectionTitle')}</h2>
           <span className="hm-muted">{translate('activeCount', String(activeCount))}</span>
         </div>
+
+        {hasUserAgent ? <p className="hm-hint">{translate('userAgentHint')}</p> : null}
 
         {headers.length === 0 ? (
           <div className="hm-empty">{translate('emptyHeaders')}</div>
